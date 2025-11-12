@@ -1,0 +1,5 @@
+# Compiled COBOL programs
+src/**/*[^\.cbl]
+
+# Sort temporary files
+SORTWORK.TMP

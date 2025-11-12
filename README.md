@@ -83,3 +83,5 @@ COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き
 | `ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
 | `INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
 | `OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
+| `INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
+| `OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |

@@ -1,6 +1,5 @@
        *> FILEDEF.CPY
-       *> This copybook defines all the files used in the system.
-
+       *> Defines all files used in the sales processing sample.
        SELECT SALES-FILE ASSIGN TO "data/DAILY_SALES.DAT"
            ORGANIZATION IS LINE SEQUENTIAL.
 
@@ -14,4 +13,4 @@
            ORGANIZATION IS INDEXED
            ACCESS MODE IS DYNAMIC
            RECORD KEY IS IM-ITEM-CODE
-           FILE STATUS IS ITEM-FILE-STATUS.
+           FILE STATUS IS FS-ITEM.

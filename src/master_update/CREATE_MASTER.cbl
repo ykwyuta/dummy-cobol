@@ -3,7 +3,8 @@
        AUTHOR. Jules.
       *
       * This program reads a sequential master data file and
-      * creates an indexed master file from it.
+      * creates an indexed master file from it. It's a utility
+      * for the master update sample.
       *
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
@@ -26,7 +27,6 @@
            05  SM-STOCK-QTY         PIC S9(7).
            05  SM-UNIT-PRICE        PIC 9(7)V99.
 
-      * Use COPY句 to include the item master file definition
        COPY "ITEMREC.CPY".
 
        WORKING-STORAGE SECTION.
@@ -67,6 +67,6 @@
 
            WRITE IM-RECORD
                INVALID KEY
-                   DISPLAY "ERROR WRITING MASTER RECORD: " IM-ITEM-CODE
+                   DISPLAY "ERROR WRITING MASTER: " IM-ITEM-CODE
                    DISPLAY "FILE STATUS: " ITEM-FILE-STATUS
            END-WRITE.

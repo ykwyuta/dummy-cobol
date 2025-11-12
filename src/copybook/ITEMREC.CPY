@@ -1,6 +1,5 @@
        *> ITEMREC.CPY
-       *> This copybook defines the layout of the item master record.
-
+       *> Defines the record layout for the item master file.
        FD  ITEM-MASTER-FILE.
        01  IM-RECORD.
            05  IM-ITEM-CODE         PIC X(8).

@@ -2,9 +2,9 @@
        PROGRAM-ID. SALES-PROC.
        AUTHOR. Jules.
       *
-      * This is the main program. It processes daily sales data,
-      * validates records, writes them to a history file, and
-      * calls a subprogram to update the inventory master.
+      * Main program for the master update sample. It reads daily
+      * sales data, validates it, writes valid records to a history
+      * file, and calls a subprogram to update the master file.
       *
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
@@ -24,13 +24,12 @@
                88  IS-VALID         VALUE 'Y'.
 
        01  WS-FILE-STATUS.
-           05  ITEM-FILE-STATUS     PIC X(2).
+           05  FS-ITEM              PIC X(2).
 
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
            OPEN INPUT SALES-FILE.
-           OPEN OUTPUT HISTORY-FILE.
-           OPEN OUTPUT ERROR-FILE.
+           OPEN OUTPUT HISTORY-FILE ERROR-FILE.
 
            PERFORM UNTIL IS-SALES-EOF
                READ SALES-FILE
@@ -42,14 +41,12 @@
            END-PERFORM.
 
        END-PROGRAM.
-           CLOSE SALES-FILE
-                 HISTORY-FILE
-                 ERROR-FILE.
+           CLOSE SALES-FILE HISTORY-FILE ERROR-FILE.
            STOP RUN.
 
        VALIDATE-AND-PROCESS.
            MOVE "Y" TO WS-VALIDATION-FLAG.
-      * Data Validation
+
            IF SD-ITEM-CODE = SPACES
                MOVE "Item code is blank." TO ER-MESSAGE
                MOVE "N" TO WS-VALIDATION-FLAG
@@ -58,7 +55,6 @@
                MOVE "N" TO WS-VALIDATION-FLAG
            END-IF.
 
-      * Process based on validation result
            IF IS-VALID
               PERFORM WRITE-TO-HISTORY
               PERFORM UPDATE-INVENTORY

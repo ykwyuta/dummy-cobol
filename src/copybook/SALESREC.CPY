@@ -1,6 +1,5 @@
        *> SALESREC.CPY
-       *> This copybook defines the layout of the sales data record.
-
+       *> Defines the record layout for sales, history, and error files.
        FD  SALES-FILE.
        01  SD-RECORD.
            05  SD-ITEM-CODE         PIC X(8).

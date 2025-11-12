@@ -2,8 +2,9 @@
        PROGRAM-ID. INV_UPDATE.
        AUTHOR. Jules.
       *
-      * This is a subprogram to update the stock quantity in the
-      * item master file. It is called by the main program.
+      * Subprogram for the master update sample. It receives an
+      * item code and quantity, then updates the stock in the
+      * indexed master file.
       *
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
@@ -12,15 +13,14 @@
                ORGANIZATION IS INDEXED
                ACCESS MODE IS DYNAMIC
                RECORD KEY IS IM-ITEM-CODE
-               FILE STATUS IS ITEM-FILE-STATUS.
+               FILE STATUS IS FS-ITEM.
 
        DATA DIVISION.
        FILE SECTION.
            COPY "ITEMREC.CPY".
 
        WORKING-STORAGE SECTION.
-       01  WS-FILE-STATUS.
-           05  ITEM-FILE-STATUS     PIC X(2).
+       01  FS-ITEM                  PIC X(2).
        01  WS-CALC-QTY              PIC S9(7).
 
        LINKAGE SECTION.
@@ -31,9 +31,8 @@
        MAIN-PROCEDURE.
            OPEN I-O ITEM-MASTER-FILE.
 
-           IF ITEM-FILE-STATUS NOT = "00"
-               DISPLAY "ERROR OPENING MASTER FILE IN SUB: "
-                       ITEM-FILE-STATUS
+           IF FS-ITEM NOT = "00"
+               DISPLAY "SUB: ERROR OPENING MASTER FILE: " FS-ITEM
                GO TO END-PROGRAM
            END-IF.
 
@@ -42,7 +41,7 @@
            READ ITEM-MASTER-FILE
                INVALID KEY
                    DISPLAY "SUB: ITEM NOT FOUND. CODE: " LK-ITEM-CODE
-                           ", STATUS: " ITEM-FILE-STATUS
+                           ", STATUS: " FS-ITEM
                    GO TO END-UPDATE
            END-READ.
 
@@ -52,7 +51,7 @@
            REWRITE IM-RECORD
                INVALID KEY
                    DISPLAY "SUB: ERROR REWRITING RECORD. CODE: "
-                           LK-ITEM-CODE ", STATUS: " ITEM-FILE-STATUS
+                           LK-ITEM-CODE ", STATUS: " FS-ITEM
            END-REWRITE.
 
        END-UPDATE.

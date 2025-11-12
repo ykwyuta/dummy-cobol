@@ -13,13 +13,13 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/selection/INPUT_SELECT.DAT"
+           SELECT INPUT-FILE ASSIGN TO DSN-INPUT
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-INPUT.
-           SELECT OUTPUT-FILE ASSIGN TO "data/selection/OUTPUT_SELECT.DAT"
+           SELECT OUTPUT-FILE ASSIGN TO DSN-OUTPUT
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-OUTPUT.
-           SELECT ERROR-FILE ASSIGN TO "data/selection/ERROR_SELECT.LST"
+           SELECT ERROR-FILE ASSIGN TO DSN-ERROR
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-ERROR.
 
@@ -50,6 +50,14 @@
                88 FS-OUTPUT-OK  VALUE "00".
            05  FS-ERROR         PIC X(2).
                88 FS-ERROR-OK   VALUE "00".
+
+       01  DSN-FIELDS.
+           05 DSN-INPUT         PIC X(32)
+              VALUE "data/selection/INPUT_SELECT.DAT".
+           05 DSN-OUTPUT        PIC X(33)
+              VALUE "data/selection/OUTPUT_SELECT.DAT".
+           05 DSN-ERROR         PIC X(32)
+              VALUE "data/selection/ERROR_SELECT.LST".
 
        01  WORK-AREAS.
            05  SELECT-DEPT-CODE PIC X(2) VALUE '01'.

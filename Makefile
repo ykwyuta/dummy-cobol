@@ -4,7 +4,7 @@
 COB_COMPILER := cobc
 
 # Compiler flags
-COB_FLAGS := -x -fixed
+COB_FLAGS := -x -fixed -Isrc/copybook
 
 # Source directory
 SRC_DIR := src

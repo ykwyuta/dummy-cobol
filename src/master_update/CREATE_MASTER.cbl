@@ -54,7 +54,6 @@
                END-READ
            END-PERFORM.
 
-       END-PROGRAM.
            CLOSE SEQ-MASTER-FILE
                  ITEM-MASTER-FILE.
            STOP RUN.
@@ -70,3 +69,5 @@
                    DISPLAY "ERROR WRITING MASTER: " IM-ITEM-CODE
                    DISPLAY "FILE STATUS: " ITEM-FILE-STATUS
            END-WRITE.
+
+       END PROGRAM CREATE-MASTER.

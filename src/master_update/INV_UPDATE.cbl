@@ -33,7 +33,7 @@
 
            IF FS-ITEM NOT = "00"
                DISPLAY "SUB: ERROR OPENING MASTER FILE: " FS-ITEM
-               GO TO END-PROGRAM
+               GO TO 9999-EXIT
            END-IF.
 
            MOVE LK-ITEM-CODE TO IM-ITEM-CODE.
@@ -57,5 +57,7 @@
        END-UPDATE.
            CLOSE ITEM-MASTER-FILE.
 
-       END-PROGRAM.
+       9999-EXIT.
            EXIT PROGRAM.
+
+       END PROGRAM INV_UPDATE.

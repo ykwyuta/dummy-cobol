@@ -26,20 +26,10 @@
 
        DATA DIVISION.
        FILE SECTION.
-       FD  SALES-FILE.
-       01  SALES-RECORD-FS      PIC X(80).
-       FD  HISTORY-FILE.
-       01  HISTORY-RECORD-FS    PIC X(80).
-       FD  ERROR-FILE.
-       01  ERROR-RECORD-FS      PIC X(100).
-       FD  ITEM-MASTER-FILE.
-       01  ITEM-MASTER-RECORD-FS PIC X(100).
-
+           COPY "SALESREC.CPY".
+           COPY "ITEMREC.CPY".
 
        WORKING-STORAGE SECTION.
-       COPY "SALESREC.CPY".
-       COPY "ITEMREC.CPY".
-
        01  WS-FLAGS.
            05  WS-SALES-EOF-FLAG    PIC X VALUE 'N'.
                88  IS-SALES-EOF     VALUE 'Y'.
@@ -51,7 +41,6 @@
            05  FS-HISTORY           PIC X(2).
            05  FS-ERROR             PIC X(2).
            05  FS-ITEM              PIC X(2).
-
        01  DSN-FIELDS.
            05 DSN-SALES         PIC X(32)
               VALUE "data/master_update/DAILY_SALES.DAT".

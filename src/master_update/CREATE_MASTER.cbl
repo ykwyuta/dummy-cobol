@@ -9,29 +9,37 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT SEQ-MASTER-FILE ASSIGN TO "data/master_update/initial_master.dat"
-               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT SEQ-MASTER-FILE ASSIGN TO DSN-SEQ-MASTER
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-SEQ-MASTER.
 
-           SELECT ITEM-MASTER-FILE ASSIGN TO "data/master_update/MASTER_ITEM.IDX"
+           SELECT ITEM-MASTER-FILE ASSIGN TO DSN-ITEM-MASTER
                ORGANIZATION IS INDEXED
                ACCESS MODE IS SEQUENTIAL
                RECORD KEY IS IM-ITEM-CODE
-               FILE STATUS IS ITEM-FILE-STATUS.
+               FILE STATUS IS FS-ITEM-MASTER.
 
        DATA DIVISION.
        FILE SECTION.
        FD  SEQ-MASTER-FILE.
-       01  SEQ-MASTER-RECORD.
-           05  SM-ITEM-CODE         PIC X(8).
-           05  SM-ITEM-NAME         PIC X(30).
-           05  SM-STOCK-QTY         PIC S9(7).
-           05  SM-UNIT-PRICE        PIC 9(7)V99.
+       01  SEQ-MASTER-RECORD    PIC X(54).
+       FD  ITEM-MASTER-FILE.
+       01  ITEM-MASTER-RECORD   PIC X(54).
 
-       COPY "ITEMREC.CPY".
 
        WORKING-STORAGE SECTION.
+       COPY "ITEMREC.CPY".
+
        01  WS-FILE-STATUS.
-           05  ITEM-FILE-STATUS     PIC X(2).
+           05  FS-SEQ-MASTER    PIC X(2).
+           05  FS-ITEM-MASTER   PIC X(2).
+
+       01  DSN-FIELDS.
+           05 DSN-SEQ-MASTER    PIC X(36)
+              VALUE "data/master_update/initial_master.dat".
+           05 DSN-ITEM-MASTER   PIC X(33)
+              VALUE "data/master_update/MASTER_ITEM.IDX".
+
        01  WS-EOF-FLAG              PIC X VALUE 'N'.
            88  IS-EOF               VALUE 'Y'.
 

@@ -17,12 +17,12 @@
       -    "T"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-INPUT.
-           SELECT OUTPUT-FILE ASSIGN TO "data/aggregation/OUTPUT_SUMM.D"
-      -    "AT"
+           SELECT OUTPUT-FILE ASSIGN TO "data/aggregation/OUTPUT_SUMM.DA"
+      -    "T"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-OUTPUT.
-           SELECT CONTROL-LIST ASSIGN TO "data/aggregation/CONTROL_LIST"
-      -    ".DAT"
+           SELECT CONTROL-LIST ASSIGN TO "data/aggregation/CONTROL_LIST.DA"
+      -    "T"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-CONTROL.
 

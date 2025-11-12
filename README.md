@@ -68,20 +68,21 @@ COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き
 
 ## 📊 データファイルレイアウト
 
-`data/` ディレクトリに配置されている各ファイルの役割は以下の通りです。
+`data/` ディレクトリのサブディレクトリに配置されている各ファイルの役割は以下の通りです。
 
 | ファイル名 | I/O | 関連プログラム | 概要 |
 | :--- | :--- | :--- | :--- |
-| `MASTER.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のマスターファイル |
-| `TRAN.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のトランザクションファイル |
-| `NEWMAST.DAT` | 出力 | `MATCH01.cbl` | マッチング処理後の新マスターファイル |
-| `INPUT_SUMM.DAT` | 入力 | `SUMM01.cbl` | 集計処理の入力データ |
-| `OUTPUT_SUMM.DAT`| 出力 | `SUMM01.cbl` | 集計処理の出力結果 |
-| `INPUT_SELECT.DAT`| 入力 | `SELECT01.cbl` | 抽出処理の入力データ |
-| `OUTPUT_SELECT.DAT`| 出力 | `SELECT01.cbl` | 抽出処理の出力結果 |
-| `CONTROL_LIST.DAT`| 出力 | `SUMM01.cbl` | 集計処理のコントロールリスト（件数・合計） |
-| `ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
-| `INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
-| `OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
-| `INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
-| `OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |
+| `matching/MASTER.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のマスターファイル |
+| `matching/TRAN.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のトランザクションファイル |
+| `matching/NEWMAST.DAT` | 出力 | `MATCH01.cbl` | マッチング処理後の新マスターファイル |
+| `matching/ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
+| `aggregation/INPUT_SUMM.DAT` | 入力 | `SUMM01.cbl` | 集計処理の入力データ |
+| `aggregation/OUTPUT_SUMM.DAT`| 出力 | `SUMM01.cbl` | 集計処理の出力結果 |
+| `aggregation/CONTROL_LIST.DAT`| 出力 | `SUMM01.cbl` | 集計処理のコントロールリスト（件数・合計） |
+| `selection/INPUT_SELECT.DAT`| 入力 | `SELECT01.cbl` | 抽出処理の入力データ |
+| `selection/OUTPUT_SELECT.DAT`| 出力 | `SELECT01.cbl` | 抽出処理の出力結果 |
+| `selection/ERROR_SELECT.LST` | 出力 | `SELECT01.cbl` | 抽出処理のエラーリスト |
+| `reformatting/INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
+| `reformatting/OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
+| `sorting/INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
+| `sorting/OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |

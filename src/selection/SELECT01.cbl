@@ -13,13 +13,16 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/INPUT_SELECT.DAT"
+           SELECT INPUT-FILE ASSIGN TO
+                  "data/selection/INPUT_SELECT.DAT"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-INPUT.
-           SELECT OUTPUT-FILE ASSIGN TO "data/OUTPUT_SELECT.DAT"
+           SELECT OUTPUT-FILE ASSIGN TO
+                  "data/selection/OUTPUT_SELECT.DAT"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-OUTPUT.
-           SELECT ERROR-FILE ASSIGN TO "data/ERROR_SELECT.LST"
+           SELECT ERROR-FILE ASSIGN TO
+                  "data/selection/ERROR_SELECT.LST"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-ERROR.
 

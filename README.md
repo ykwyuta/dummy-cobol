@@ -81,3 +81,5 @@ COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き
 | `OUTPUT_SELECT.DAT`| 出力 | `SELECT01.cbl` | 抽出処理の出力結果 |
 | `CONTROL_LIST.DAT`| 出力 | `SUMM01.cbl` | 集計処理のコントロールリスト（件数・合計） |
 | `ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
+| `INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
+| `OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |

@@ -5,10 +5,12 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/reformatting/INPUT-REFORMAT.DAT"
-               ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT OUTPUT-FILE ASSIGN TO "data/reformatting/OUTPUT-REFORMAT.DAT"
-               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT INPUT-FILE ASSIGN TO DSN-INPUT
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-INPUT.
+           SELECT OUTPUT-FILE ASSIGN TO DSN-OUTPUT
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-OUTPUT.
 
        DATA DIVISION.
        FILE SECTION.
@@ -25,6 +27,19 @@
            05 OUT-PHONE     PIC 9(9).
 
        WORKING-STORAGE SECTION.
+       01  FILE-STATUS-CODES.
+           05  FS-INPUT         PIC X(2).
+               88 FS-INPUT-OK   VALUE "00".
+               88 FS-INPUT-EOF  VALUE "10".
+           05  FS-OUTPUT        PIC X(2).
+               88 FS-OUTPUT-OK  VALUE "00".
+
+       01  DSN-FIELDS.
+           05 DSN-INPUT         PIC X(36)
+              VALUE "data/reformatting/INPUT-REFORMAT.DAT".
+           05 DSN-OUTPUT        PIC X(37)
+              VALUE "data/reformatting/OUTPUT-REFORMAT.DAT".
+
        01  WS-EOF-FLAG      PIC X VALUE 'N'.
            88 WS-EOF               VALUE 'Y'.
 

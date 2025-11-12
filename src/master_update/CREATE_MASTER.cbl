@@ -9,14 +9,15 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT SEQ-MASTER-FILE ASSIGN TO "data/master_update/initial_master.dat"
-               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT SEQ-MASTER-FILE ASSIGN TO DSN-SEQ-MASTER
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-SEQ-MASTER.
 
-           SELECT ITEM-MASTER-FILE ASSIGN TO "data/master_update/MASTER_ITEM.IDX"
+           SELECT ITEM-MASTER-FILE ASSIGN TO DSN-ITEM-MASTER
                ORGANIZATION IS INDEXED
                ACCESS MODE IS SEQUENTIAL
                RECORD KEY IS IM-ITEM-CODE
-               FILE STATUS IS ITEM-FILE-STATUS.
+               FILE STATUS IS FS-ITEM-MASTER.
 
        DATA DIVISION.
        FILE SECTION.
@@ -31,7 +32,13 @@
 
        WORKING-STORAGE SECTION.
        01  WS-FILE-STATUS.
-           05  ITEM-FILE-STATUS     PIC X(2).
+           05  FS-SEQ-MASTER        PIC X(2).
+           05  FS-ITEM-MASTER       PIC X(2).
+       01  DSN-FIELDS.
+           05 DSN-SEQ-MASTER        PIC X(37)
+              VALUE "data/master_update/initial_master.dat".
+           05 DSN-ITEM-MASTER       PIC X(34)
+              VALUE "data/master_update/MASTER_ITEM.IDX".
        01  WS-EOF-FLAG              PIC X VALUE 'N'.
            88  IS-EOF               VALUE 'Y'.
 
@@ -40,9 +47,9 @@
            OPEN INPUT SEQ-MASTER-FILE.
            OPEN OUTPUT ITEM-MASTER-FILE.
 
-           IF ITEM-FILE-STATUS NOT = "00"
-              DISPLAY "ERROR OPENING MASTER FILE: " ITEM-FILE-STATUS
-              GO TO END-PROGRAM
+           IF FS-ITEM-MASTER NOT = "00"
+              DISPLAY "ERROR OPENING MASTER FILE: " FS-ITEM-MASTER
+              STOP RUN
            END-IF.
 
            PERFORM UNTIL IS-EOF
@@ -67,7 +74,7 @@
            WRITE IM-RECORD
                INVALID KEY
                    DISPLAY "ERROR WRITING MASTER: " IM-ITEM-CODE
-                   DISPLAY "FILE STATUS: " ITEM-FILE-STATUS
+                   DISPLAY "FILE STATUS: " FS-ITEM-MASTER
            END-WRITE.
 
        END PROGRAM CREATE-MASTER.

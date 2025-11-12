@@ -13,13 +13,13 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/aggregation/INPUT_SUMM.DAT"
+           SELECT INPUT-FILE ASSIGN TO DSN-INPUT
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-INPUT.
-           SELECT OUTPUT-FILE ASSIGN TO "data/aggregation/OUTPUT_SUMM.DAT"
+           SELECT OUTPUT-FILE ASSIGN TO DSN-OUTPUT
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-OUTPUT.
-           SELECT CONTROL-LIST ASSIGN TO "data/aggregation/CONTROL_LIST.DAT"
+           SELECT CONTROL-LIST ASSIGN TO DSN-CONTROL
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-CONTROL.
 
@@ -49,6 +49,14 @@
                88 FS-OUTPUT-OK  VALUE "00".
            05  FS-CONTROL       PIC X(2).
                88 FS-CONTROL-OK VALUE "00".
+       01  DSN-FIELDS.
+           05 DSN-INPUT         PIC X(31)
+              VALUE "data/aggregation/INPUT_SUMM.DAT".
+           05 DSN-OUTPUT        PIC X(32)
+              VALUE "data/aggregation/OUTPUT_SUMM.DAT".
+           05 DSN-CONTROL       PIC X(34)
+              VALUE "data/aggregation/CONTROL_LIST.DAT".
+
 
        01  WORK-AREAS.
            05  PREV-DEPT-CODE   PIC X(2) VALUE SPACES.
@@ -66,7 +74,7 @@
            05 FILLER           PIC X(21) VALUE " OUTPUT RECORD COUNT: ".
            05 RPT-OUT-COUNT    PIC ZZZZ9.
            05 FILLER           PIC X(15) VALUE " GRAND TOTAL: ".
-           05 RPT-GRAND-TOTAL  PIC ZZZ,ZZZ,ZZ9.
+           05 RPT-GRAND-TOTAL  PIC ZZZ,ZZZ,ZZZ,ZZ9.
 
        PROCEDURE DIVISION.
        1000-MAIN.

@@ -9,7 +9,20 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           COPY "FILEDEF.CPY".
+           SELECT SALES-FILE ASSIGN TO DSN-SALES
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-SALES.
+           SELECT HISTORY-FILE ASSIGN TO DSN-HISTORY
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-HISTORY.
+           SELECT ERROR-FILE ASSIGN TO DSN-ERROR
+               ORGANIZATION IS LINE SEQUENTIAL
+               FILE STATUS IS FS-ERROR.
+           SELECT ITEM-MASTER-FILE ASSIGN TO DSN-ITEM
+               ORGANIZATION IS INDEXED
+               ACCESS MODE IS DYNAMIC
+               RECORD KEY IS IM-ITEM-CODE
+               FILE STATUS IS FS-ITEM.
 
        DATA DIVISION.
        FILE SECTION.
@@ -24,7 +37,19 @@
                88  IS-VALID         VALUE 'Y'.
 
        01  WS-FILE-STATUS.
+           05  FS-SALES             PIC X(2).
+           05  FS-HISTORY           PIC X(2).
+           05  FS-ERROR             PIC X(2).
            05  FS-ITEM              PIC X(2).
+       01  DSN-FIELDS.
+           05 DSN-SALES         PIC X(34)
+              VALUE "data/master_update/DAILY_SALES.DAT".
+           05 DSN-HISTORY       PIC X(36)
+              VALUE "data/master_update/SALES_HISTORY.DAT".
+           05 DSN-ERROR         PIC X(35)
+              VALUE "data/master_update/ERROR_SALES.LST".
+           05 DSN-ITEM          PIC X(35)
+              VALUE "data/master_update/MASTER_ITEM.IDX".
 
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.

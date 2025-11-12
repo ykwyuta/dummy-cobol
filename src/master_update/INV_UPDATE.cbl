@@ -9,7 +9,7 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT ITEM-MASTER-FILE ASSIGN TO "data/master_update/MASTER_ITEM.IDX"
+           SELECT ITEM-MASTER-FILE ASSIGN TO DSN-ITEM-MASTER
                ORGANIZATION IS INDEXED
                ACCESS MODE IS DYNAMIC
                RECORD KEY IS IM-ITEM-CODE
@@ -21,6 +21,8 @@
 
        WORKING-STORAGE SECTION.
        01  FS-ITEM                  PIC X(2).
+       01  DSN-ITEM-MASTER          PIC X(34)
+           VALUE "data/master_update/MASTER_ITEM.IDX".
        01  WS-CALC-QTY              PIC S9(7).
 
        LINKAGE SECTION.

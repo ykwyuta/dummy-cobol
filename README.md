@@ -23,6 +23,7 @@ COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き
 | **抽出/選択**| `SELECT01.cbl` | 条件に合致するレコードのみを抽出し、**エラーリスト**を作成。 |
 | **変換** | `REFORMAT01.cbl` | 固定長ファイルを読み込み、項目を並べ替えて別の固定長ファイルに出力。 |
 | **ソート** | `SORT01.cbl` | COBOLの**SORT文**を使用してファイルをソートする基本処理。 |
+| **マスター更新** | `SALES_PROC.cbl` | 売上データに基づき**索引マスターファイル**を更新。**サブルーチンコール**や**COPY句**も使用。 |
 
 ---
 
@@ -85,3 +86,7 @@ COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き
 | `OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
 | `INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
 | `OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |
+| `DAILY_SALES.DAT` | 入力 | `SALES_PROC.cbl` | マスター更新処理の日次売上データ |
+| `MASTER_ITEM.IDX` | 入力/更新 | `SALES_PROC.cbl`, `INV_UPDATE.cbl` | 商品マスター（**索引ファイル**） |
+| `SALES_HISTORY.DAT`| 出力 | `SALES_PROC.cbl` | 正常処理された売上データの履歴 |
+| `ERROR_SALES.LST` | 出力 | `SALES_PROC.cbl` | 検証エラーとなった売上データ |

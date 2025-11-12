@@ -71,22 +71,24 @@ COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き
 
 `data/` ディレクトリに配置されている各ファイルの役割は以下の通りです。
 
-| ファイル名 | I/O | 関連プログラム | 概要 |
+| ファイルパス | I/O | 関連プログラム | 概要 |
 | :--- | :--- | :--- | :--- |
-| `MASTER.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のマスターファイル |
-| `TRAN.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のトランザクションファイル |
-| `NEWMAST.DAT` | 出力 | `MATCH01.cbl` | マッチング処理後の新マスターファイル |
-| `INPUT_SUMM.DAT` | 入力 | `SUMM01.cbl` | 集計処理の入力データ |
-| `OUTPUT_SUMM.DAT`| 出力 | `SUMM01.cbl` | 集計処理の出力結果 |
-| `INPUT_SELECT.DAT`| 入力 | `SELECT01.cbl` | 抽出処理の入力データ |
-| `OUTPUT_SELECT.DAT`| 出力 | `SELECT01.cbl` | 抽出処理の出力結果 |
-| `CONTROL_LIST.DAT`| 出力 | `SUMM01.cbl` | 集計処理のコントロールリスト（件数・合計） |
-| `ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
-| `INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
-| `OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
-| `INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
-| `OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |
-| `DAILY_SALES.DAT` | 入力 | `SALES_PROC.cbl` | マスター更新処理の日次売上データ |
-| `MASTER_ITEM.IDX` | 入力/更新 | `SALES_PROC.cbl`, `INV_UPDATE.cbl` | 商品マスター（**索引ファイル**） |
-| `SALES_HISTORY.DAT`| 出力 | `SALES_PROC.cbl` | 正常処理された売上データの履歴 |
-| `ERROR_SALES.LST` | 出力 | `SALES_PROC.cbl` | 検証エラーとなった売上データ |
+| `data/matching/MASTER.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のマスターファイル |
+| `data/matching/TRAN.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のトランザクションファイル |
+| `data/matching/NEWMAST.DAT` | 出力 | `MATCH01.cbl` | マッチング処理後の新マスターファイル |
+| `data/matching/ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
+| `data/aggregation/INPUT_SUMM.DAT` | 入力 | `SUMM01.cbl` | 集計処理の入力データ |
+| `data/aggregation/OUTPUT_SUMM.DAT`| 出力 | `SUMM01.cbl` | 集計処理の出力結果 |
+| `data/aggregation/CONTROL_LIST.DAT`| 出力 | `SUMM01.cbl` | 集計処理のコントロールリスト（件数・合計） |
+| `data/selection/INPUT_SELECT.DAT`| 入力 | `SELECT01.cbl` | 抽出処理の入力データ |
+| `data/selection/OUTPUT_SELECT.DAT`| 出力 | `SELECT01.cbl` | 抽出処理の出力結果 |
+| `data/selection/ERROR_SELECT.LST`| 出力 | `SELECT01.cbl` | 抽出処理のエラーリスト |
+| `data/reformatting/INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
+| `data/reformatting/OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
+| `data/sorting/INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
+| `data/sorting/OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |
+| `data/master_update/initial_master.dat` | 入力 | `CREATE_MASTER.cbl` | マスターファイル作成の入力データ |
+| `data/master_update/DAILY_SALES.DAT` | 入力 | `SALES_PROC.cbl` | マスター更新処理の日次売上データ |
+| `data/master_update/MASTER_ITEM.IDX` | 入力/更新 | `SALES_PROC.cbl`, `INV_UPDATE.cbl`, `CREATE_MASTER.cbl` | 商品マスター（**索引ファイル**） |
+| `data/master_update/SALES_HISTORY.DAT`| 出力 | `SALES_PROC.cbl` | 正常処理された売上データの履歴 |
+| `data/master_update/ERROR_SALES.LST` | 出力 | `SALES_PROC.cbl` | 検証エラーとなった売上データ |

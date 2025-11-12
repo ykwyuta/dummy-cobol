@@ -9,10 +9,10 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT SEQ-MASTER-FILE ASSIGN TO "data/initial_master.dat"
+           SELECT SEQ-MASTER-FILE ASSIGN TO "data/master_update/initial_master.dat"
                ORGANIZATION IS LINE SEQUENTIAL.
 
-           SELECT ITEM-MASTER-FILE ASSIGN TO "data/MASTER_ITEM.IDX"
+           SELECT ITEM-MASTER-FILE ASSIGN TO "data/master_update/MASTER_ITEM.IDX"
                ORGANIZATION IS INDEXED
                ACCESS MODE IS SEQUENTIAL
                RECORD KEY IS IM-ITEM-CODE

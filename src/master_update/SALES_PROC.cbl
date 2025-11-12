@@ -40,7 +40,6 @@
                END-READ
            END-PERFORM.
 
-       END-PROGRAM.
            CLOSE SALES-FILE HISTORY-FILE ERROR-FILE.
            STOP RUN.
 
@@ -72,3 +71,5 @@
 
        UPDATE-INVENTORY.
            CALL "INV_UPDATE" USING SD-ITEM-CODE, SD-QTY.
+
+       END PROGRAM SALES-PROC.

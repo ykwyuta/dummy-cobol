@@ -13,13 +13,16 @@
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT INPUT-FILE ASSIGN TO "data/aggregation/INPUT_SUMM.DAT"
+           SELECT INPUT-FILE ASSIGN TO "data/aggregation/INPUT_SUMM.DA"
+      -    "T"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-INPUT.
-           SELECT OUTPUT-FILE ASSIGN TO "data/aggregation/OUTPUT_SUMM.DAT"
+           SELECT OUTPUT-FILE ASSIGN TO "data/aggregation/OUTPUT_SUMM.D"
+      -    "AT"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-OUTPUT.
-           SELECT CONTROL-LIST ASSIGN TO "data/aggregation/CONTROL_LIST.DAT"
+           SELECT CONTROL-LIST ASSIGN TO "data/aggregation/CONTROL_LIST"
+      -    ".DAT"
                   ORGANIZATION IS LINE SEQUENTIAL
                   FILE STATUS IS FS-CONTROL.
 

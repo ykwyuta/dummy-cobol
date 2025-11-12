@@ -32,12 +32,12 @@
 
        WORKING-STORAGE SECTION.
        01  WS-FILE-STATUS.
-           05  FS-SEQ-MASTER    PIC X(2).
-           05  FS-ITEM-MASTER   PIC X(2).
+           05  FS-SEQ-MASTER        PIC X(2).
+           05  FS-ITEM-MASTER       PIC X(2).
        01  DSN-FIELDS.
-           05 DSN-SEQ-MASTER    PIC X(36)
+           05 DSN-SEQ-MASTER        PIC X(37)
               VALUE "data/master_update/initial_master.dat".
-           05 DSN-ITEM-MASTER   PIC X(33)
+           05 DSN-ITEM-MASTER       PIC X(34)
               VALUE "data/master_update/MASTER_ITEM.IDX".
        01  WS-EOF-FLAG              PIC X VALUE 'N'.
            88  IS-EOF               VALUE 'Y'.
@@ -47,9 +47,9 @@
            OPEN INPUT SEQ-MASTER-FILE.
            OPEN OUTPUT ITEM-MASTER-FILE.
 
-           IF ITEM-FILE-STATUS NOT = "00"
-              DISPLAY "ERROR OPENING MASTER FILE: " ITEM-FILE-STATUS
-              GO TO END-PROGRAM
+           IF FS-ITEM-MASTER NOT = "00"
+              DISPLAY "ERROR OPENING MASTER FILE: " FS-ITEM-MASTER
+              STOP RUN
            END-IF.
 
            PERFORM UNTIL IS-EOF
@@ -74,7 +74,7 @@
            WRITE IM-RECORD
                INVALID KEY
                    DISPLAY "ERROR WRITING MASTER: " IM-ITEM-CODE
-                   DISPLAY "FILE STATUS: " ITEM-FILE-STATUS
+                   DISPLAY "FILE STATUS: " FS-ITEM-MASTER
            END-WRITE.
 
        END PROGRAM CREATE-MASTER.

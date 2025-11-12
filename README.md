@@ -1,87 +1,66 @@
-# 💻 GnuCOBOL（OpenCOBOL）バッチ処理サンプル集
+# GnuCOBOL Sample: Sales Data Processing and Master Update
 
-## 📝 プロジェクト概要
+This project is a sample COBOL program for processing sales data, performing validation, and updating a master file. It demonstrates the use of subroutines, copybooks, and indexed files.
 
-このプロジェクトは、**GnuCOBOL (GNU OpenCOBOL)** を用いて開発される、**一般的なビジネスバッチ処理**のパターンを網羅したサンプルコード集です。
+## 1. Program Overview
 
-COBOL学習者が実務で遭遇する頻度の高い、「ファイルの突き合わせ（マッチング）」「データ集計」「データ抽出」などの基本的なバッチ処理のロジックを、すぐに実行可能な形で提供します。
+*   **SALES_PROC (Main Program)**: Reads daily sales data, validates it, and calls a subroutine to update the inventory.
+*   **INV_UPDATE (Subroutine)**: Updates the stock quantity in the item master file.
+*   **CREATE_MASTER**: A utility program to create the initial indexed master file from a sequential file.
 
-## 🎯 目的
+## 2. Directory Structure
 
-* GnuCOBOLによる**実用的なバッチ処理ロジック**の理解を深める。
-* COBOLの**ファイル処理（順ファイル、索引ファイル）** や **SORT文** の具体的な使用方法を学ぶ。
-* 実務開発における**リファレンス**として活用する。
+```
+.
+├── data/                 # Data files
+│   ├── DAILY_SALES.DAT     # Input: Daily sales data
+│   ├── initial_master.dat  # Input: Initial master data (sequential)
+│   ├── MASTER_ITEM.IDX     # Generated: Indexed item master
+│   ├── SALES_HISTORY.DAT   # Output: Valid sales records
+│   └── ERROR_SALES.LST     # Output: Invalid sales records
+├── src/                  # Source code
+│   ├── SALES_PROC.cbl      # Main program
+│   ├── INV_UPDATE.cbl      # Subroutine
+│   ├── CREATE_MASTER.cbl   # Master creation utility
+│   └── copybook/           # Copybooks (shared data definitions)
+│       ├── FILEDEF.CPY
+│       ├── ITEMREC.CPY
+│       └── SALESREC.CPY
+└── README.md
+```
 
-## 🚀 収録されているサンプル（抜粋）
+## 3. Execution Steps
 
-主要なバッチ処理のカテゴリ別にサンプルを分類しています。
+### Step 1: Compile the Master File Creation Utility
 
-| カテゴリ | サンプル名 | 概要 |
-| :--- | :--- | :--- |
-| **マッチング** | `MATCH01.cbl` | マスタファイルとトランザクションファイルの**キー照合（追加/更新/削除）**。 |
-| **集計** | `SUMM01.cbl` | 入力ファイルから**キーブレイク**による売上集計を行い、合計値を算出。 |
-| **抽出/選択**| `SELECT01.cbl` | 条件に合致するレコードのみを抽出し、**エラーリスト**を作成。 |
-| **変換** | `REFORMAT01.cbl` | 固定長ファイルを読み込み、項目を並べ替えて別の固定長ファイルに出力。 |
-| **ソート** | `SORT01.cbl` | COBOLの**SORT文**を使用してファイルをソートする基本処理。 |
+This command compiles `CREATE_MASTER.cbl` and creates an executable file `src/CREATE_MASTER`.
 
----
+```bash
+cobc -x -o src/CREATE_MASTER src/CREATE_MASTER.cbl -I src/copybook
+```
 
-## 🛠️ 環境構築と実行方法
+### Step 2: Create the Indexed Master File
 
-### 1. 必要な環境
+Run the compiled utility to create `MASTER_ITEM.IDX` from `initial_master.dat`.
 
-* **GnuCOBOLコンパイラ**: バージョン 3.0 以降を推奨します。
-    * インストール方法: `sudo apt install gnucobol` (Linuxの場合)
+```bash
+src/CREATE_MASTER
+```
 
-### 2. サンプルの実行
+### Step 3: Compile the Main Program and Subroutine
 
-1.  **コンパイル**
-    ```bash
-    # 例：SUMM01.cblをコンパイルする場合
-    cobc -x SUMM01.cbl
-    ```
-2.  **実行**
-    サンプル実行に必要な**入力データファイル**（例：`INPUT_SUMM.DAT`）を準備した後、以下のコマンドで実行します。
-    ```bash
-    ./SUMM01
-    ```
-    * 各サンプルディレクトリ内に、実行に必要な**データ定義**と**サンプルデータ**を配置しています。
+This command compiles both `SALES_PROC.cbl` and `INV_UPDATE.cbl` together and creates a single executable `src/SALES_PROC`.
 
-### 3. データ定義について
+```bash
+cobc -x -o src/SALES_PROC src/SALES_PROC.cbl src/INV_UPDATE.cbl -I src/copybook
+```
 
-全てのサンプルプログラムは、プログラム内で定義された以下の構造を基本とします。
+### Step 4: Run the Main Program
 
-* **ファイル定義**: `SELECT ... ASSIGN TO ...`
-* **レコード定義**: `FD`句および`01`レベルの項目定義
+Execute the main program to process the sales data.
 
----
+```bash
+src/SALES_PROC
+```
 
-## 📁 ファイル配置
-
-本プロジェクトは、ソースコードとデータを明確に分離するために、以下のディレクトリ構成を採用しています。
-
-*   **`src/`**: COBOLソースコード（`.cbl`）およびコンパイル後の実行可能ファイルを格納します。
-    *   機能ごとにサブディレクトリ（例: `matching`, `aggregation`）を作成し、関連ファイルをまとめて管理します。
-*   **`data/`**: プログラムが使用する入力データファイル、およびプログラムが出力するファイルを格納します。
-
----
-
-## 📊 データファイルレイアウト
-
-`data/` ディレクトリに配置されている各ファイルの役割は以下の通りです。
-
-| ファイル名 | I/O | 関連プログラム | 概要 |
-| :--- | :--- | :--- | :--- |
-| `MASTER.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のマスターファイル |
-| `TRAN.DAT` | 入力 | `MATCH01.cbl` | マッチング処理のトランザクションファイル |
-| `NEWMAST.DAT` | 出力 | `MATCH01.cbl` | マッチング処理後の新マスターファイル |
-| `INPUT_SUMM.DAT` | 入力 | `SUMM01.cbl` | 集計処理の入力データ |
-| `OUTPUT_SUMM.DAT`| 出力 | `SUMM01.cbl` | 集計処理の出力結果 |
-| `INPUT_SELECT.DAT`| 入力 | `SELECT01.cbl` | 抽出処理の入力データ |
-| `OUTPUT_SELECT.DAT`| 出力 | `SELECT01.cbl` | 抽出処理の出力結果 |
-| `CONTROL_LIST.DAT`| 出力 | `SUMM01.cbl` | 集計処理のコントロールリスト（件数・合計） |
-| `ERROR.LST` | 出力 | `MATCH01.cbl` | マッチング処理のエラーリスト |
-| `INPUT-REFORMAT.DAT`| 入力 | `REFORMAT01.cbl` | 変換処理の入力データ |
-| `OUTPUT-REFORMAT.DAT`| 出力 | `REFORMAT01.cbl` | 変換処理の出力結果 |
-| `INPUT-SORT.DAT`| 入力 | `SORT01.cbl` | ソート処理の入力データ |
-| `OUTPUT-SORT.DAT`| 出力 | `SORT01.cbl` | ソート処理の出力結果 |
+After execution, you can check the output files `SALES_HISTORY.DAT` and `ERROR_SALES.LST` in the `data` directory to verify the results.

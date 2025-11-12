@@ -21,7 +21,7 @@
 
        WORKING-STORAGE SECTION.
        01  FS-ITEM                  PIC X(2).
-       01  DSN-ITEM-MASTER          PIC X(33)
+       01  DSN-ITEM-MASTER          PIC X(34)
            VALUE "data/master_update/MASTER_ITEM.IDX".
        01  WS-CALC-QTY              PIC S9(7).
 

@@ -42,13 +42,13 @@
            05  FS-ERROR             PIC X(2).
            05  FS-ITEM              PIC X(2).
        01  DSN-FIELDS.
-           05 DSN-SALES         PIC X(33)
+           05 DSN-SALES         PIC X(34)
               VALUE "data/master_update/DAILY_SALES.DAT".
-           05 DSN-HISTORY       PIC X(35)
+           05 DSN-HISTORY       PIC X(36)
               VALUE "data/master_update/SALES_HISTORY.DAT".
-           05 DSN-ERROR         PIC X(34)
+           05 DSN-ERROR         PIC X(35)
               VALUE "data/master_update/ERROR_SALES.LST".
-           05 DSN-ITEM          PIC X(34)
+           05 DSN-ITEM          PIC X(35)
               VALUE "data/master_update/MASTER_ITEM.IDX".
 
        PROCEDURE DIVISION.
